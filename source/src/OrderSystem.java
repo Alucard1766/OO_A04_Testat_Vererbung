@@ -20,14 +20,14 @@ class Order {
 	}
 }
 
-class Item {
+abstract class Item {
 	String description;
 	
 	public Item(String description) {
 		this.description = description;
 	}
 	
-	double getPrice(){return this.getPrice();} //TODO Korrekt so?
+	abstract double getPrice();
 	
 	void print(){
 		System.out.println("Description: " + description);
@@ -85,18 +85,26 @@ class ServiceItem extends Item {
 
 public class OrderSystem {
 	public static void main(String[] args) {
-		Item i = new ProductItem("Product i", 2, 10.0);
-		Item j = new ProductItem("Product j", 3, 30.0);
-		Item s = new ServiceItem("Service s", 50.0);
+		Item i1 = new ProductItem("Product i1", 2, 10.0);
+		Item i2 = new ProductItem("Product i2", 3, 30.0);
+		Item s1 = new ServiceItem("Service s", 50.0);
 		
-		Item[] items = new Item[3];
-		items[0] = i;
-		items[1] = j;
-		items[2] = s;
+		Item[] items1 = new Item[3];
+		items1[0] = i1;
+		items1[1] = i2;
+		items1[2] = s1;
 		
-		Order order1 = new Order(items);
+		Item[] items2 = new Item[1];
+		items2[0] = s1;
+		
+		
+		Order order1 = new Order(items1);
 		order1.printItems();
-		System.out.println("Total Price: " + order1.getTotalPrice());
+		System.out.println("Total Price: " + order1.getTotalPrice() + "\n\n");
+		
+		Order order2 = new Order(items2);
+		order2.printItems();
+		System.out.println("Total Price: " + order2.getTotalPrice());
 		
 	}
 }
